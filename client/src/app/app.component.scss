@@ -1,0 +1,94 @@
+::ng-deep gridster {
+  background: #c8c8c8 !important;
+}
+
+.top-bar {
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-family: "Roboto-Bold", "Helvetica Neue", sans-serif;
+  background-image: linear-gradient(to right, #0d116d, #0e1690, #111ab4, #161dd9, #1f1fff);
+  box-shadow: 0 4px 2px -2px gray;
+
+  .title {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 20px;
+    letter-spacing: 2px;
+  }
+
+  .toolbar {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    user-select: none;
+
+    .menu {
+      display: flex;
+      margin-right: 6px;
+      overflow: hidden;
+      align-items: center;
+      height: 44px;
+
+      &>* {
+        margin: 0 6px;
+        height: 34px;
+        width: 34px;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    .toggle {
+      font-size: 52px;
+      font-weight: 100;
+      font-family: sans-serif;
+      cursor: pointer;
+      transition: all .2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.alert-danger {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  top: 0;
+  border: 8px solid red;
+  outline: .65em solid red;
+  box-shadow: 0 0 0 .6em red;
+  border-radius: .8em;
+  z-index: 1000;
+  animation: blinker 2s alternate infinite;
+  pointer-events: none;
+}
+
+@keyframes blinker {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 100%
+  }
+}
+
+.container {
+  height: 93vh;
+
+  * {
+    height: 100%;
+    width: 100%;
+  }
+}

@@ -1,0 +1,99 @@
+<div class="widget">
+    <div class="header">
+        <div class="title">Kubernetes</div>
+        <div class="subtitle">Information about the deployment</div>
+    </div>
+    <div class="gridster-item-content">
+        <div class="options">
+            <i class="fa fa-cog" (click)="displaySettings = true"></i>
+            <i class="fa fa-trash" (click)="removeSelf.emit()"></i>
+        </div>
+        <div class="settings" *ngIf="displaySettings">
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-globe"></i></span>
+                <input type="text" pInputText placeholder="Host" [(ngModel)]="host">
+            </div>
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+                <input type="password" pInputText placeholder="Token" [(ngModel)]="token">
+            </div>
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-sync"></i></span>
+                <input type="number" pInputText placeholder="Refresh rate" [(ngModel)]="refreshRate">
+                <span class="ui-inputgroup-addon">sec.</span>
+            </div>
+            <div class="buttons">
+                <button pButton type="button" icon="fa fa-check" label="Save" (click)="saveSettings()"></button>
+                <button pButton type="button" class="ui-button-secondary" label="Cancel"
+                        (click)="displaySettings = false"></button>
+            </div>
+        </div>
+        <div class="content" *ngIf="!displaySettings">
+            <div class="no-token" *ngIf="!kubernetesService.isConnected()">
+                <span>Use the <i class="fa fa-cog"></i> menu to configure the widget.</span>
+            </div>
+            <div class="summary" *ngIf="!isLoading && kubernetesService.isConnected()">
+                <div class="deployments">
+                    <p-chart
+                        #deploymentChart
+                        class="chart"
+                        type="pie"
+                        [data]="deploymentsData"
+                        [options]="deploymentsOptions"
+                    ></p-chart>
+                    <div class="object-list">
+                        <div *ngFor="let dep of summary.deployments">
+                            <div *ngIf="dep.status === 'Running'" class="object running">
+                                <i class="fa fa-check"></i>
+                                <div class="name">{{dep.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pods">
+                    <p-chart
+                        #podsChart
+                        class="chart"
+                        type="pie"
+                        [data]="podsData"
+                        [options]="podsOptions"
+                    ></p-chart>
+                    <div class="object-list">
+                        <div *ngFor="let pod of summary.pods">
+                            <div *ngIf="pod.status === 'Running'" class="object running">
+                                <i class="fa fa-check"></i>
+                                <div class="name">{{pod.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="replica-sets">
+                    <p-chart
+                        #replicaSetsChart
+                        class="chart"
+                        type="pie"
+                        [data]="replicaSetsData"
+                        [options]="replicaSetsOptions"
+                    ></p-chart>
+                    <div class="object-list">
+                        <div *ngFor="let rep of summary.replicaSets">
+                            <div *ngIf="rep.status === 'Running'" class="object running">
+                                <i class="fa fa-check"></i>
+                                <div class="name">{{rep.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stateful-sets" *ngIf="statefulSetsData.datasets[0].data.length !== 0">
+                    <p-chart
+                        #statefulSetsChart
+                        class="chart"
+                        type="pie"
+                        [data]="statefulSetsData"
+                        [options]="statefulSetsOptions"
+                    ></p-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

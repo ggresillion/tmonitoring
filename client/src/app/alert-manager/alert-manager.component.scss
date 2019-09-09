@@ -1,0 +1,43 @@
+.no-alert {
+  margin-top: 10%;
+  text-align: center;
+  color: #c5c5c5;
+  font-weight: bold;
+}
+
+.alert {
+  position: relative;
+  display: flex;
+  margin: 30px 6px;
+
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
+
+  .labels {
+    display: flex;
+
+    &>*{
+      margin-right: 6px;
+    }
+  }
+
+  .annotations {
+    display: flex;
+
+    &>*{
+      margin-right: 6px;
+    }
+  }
+
+  &:not(:last-child):after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #ababab;
+    margin-bottom: 12px;
+  }
+}

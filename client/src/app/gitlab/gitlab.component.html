@@ -1,0 +1,97 @@
+<div class="widget">
+    <div class="header">
+        <div class="title">Gitlab</div>
+        <div class="subtitle">Information about the CI/CD</div>
+    </div>
+    <div class="gridster-item-content">
+        <div class="options">
+            <i class="fa fa-cog" (click)="displaySettings = true"></i>
+            <i class="fa fa-trash" (click)="removeSelf.emit()"></i>
+        </div>
+        <div class="settings" *ngIf="displaySettings">
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-globe"></i></span>
+                <input type="text" pInputText placeholder="Host" [(ngModel)]="host">
+            </div>
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-id-badge"></i></span>
+                <input type="text" pInputText placeholder="Project ID" [(ngModel)]="projectId">
+            </div>
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+                <input type="password" pInputText placeholder="Token" [(ngModel)]="token">
+            </div>
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-sync"></i></span>
+                <input type="number" pInputText placeholder="Refresh rate" [(ngModel)]="refreshRate">
+                <span class="ui-inputgroup-addon">sec.</span>
+            </div>
+            <div class="buttons">
+                <button pButton type="button" icon="fa fa-check" label="Save" (click)="saveSettings()"></button>
+                <button pButton type="button" class="ui-button-secondary" label="Cancel"
+                        (click)="displaySettings = false"></button>
+            </div>
+        </div>
+        <div *ngIf="!displaySettings">
+            <div class="no-token" *ngIf="!gitlabService.isConnected()">
+                <span>Use the <i class="fa fa-cog"></i> menu to configure the widget.</span>
+            </div>
+            <div *ngIf="gitlabService.isConnected()">
+                <div *ngFor="let pipeline of pipelines" class="pipeline">
+                    <button
+                            *ngIf="pipeline.status === 'passed'"
+                            pButton
+                            label="Passed"
+                            icon="fa fa-check"
+                            class="status ui-button ui-button-success"
+                    ></button>
+                    <button
+                            *ngIf="pipeline.status === 'failed'"
+                            pButton
+                            label="Failed"
+                            icon="fa fa-times"
+                            class="status ui-button ui-button-danger"
+                    ></button>
+                    <button
+                            *ngIf="pipeline.status === 'pending'"
+                            pButton
+                            label="Pending"
+                            icon="fa fa-spinner"
+                            class="status ui-button ui-button-secondary"
+                    ></button>
+                    <button
+                            *ngIf="pipeline.status === 'skipped'"
+                            pButton
+                            label="Skipped"
+                            icon="fa fa-forward"
+                            class="status ui-button ui-button-secondary"
+                    ></button>
+                    <div class="branch">
+                        <i class="fas fa-code-branch fa-xs"></i>
+                        {{pipeline.branch}}
+                    </div>
+
+                    <div class="commit">
+                        <div class="commit-name">
+                            <i class="fas fa-project-diagram fa-xs"></i>
+                            {{pipeline.commit.name}}
+                        </div>
+                        <div class="commit-user">
+                            <img class="avatar" [src]="pipeline.commit.user.avatarUrl"/>
+                            {{pipeline.commit.user.name}}
+                        </div>
+                    </div>
+
+                    <div class="date">
+                        <i class="fa fa-calendar-alt"></i>
+                        {{pipeline.date | date: 'short'}}
+                    </div>
+
+                    <div class="failed-reason">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

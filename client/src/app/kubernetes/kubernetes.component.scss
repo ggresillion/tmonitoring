@@ -1,0 +1,39 @@
+.summary {
+  display: flex;
+  flex-direction: row;
+
+  &>* {
+    width: 25%;
+    flex: 1;
+  }
+
+  .object-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+
+    .object {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: #7a7a7a;
+
+      &>* {
+        margin: 4px;
+      }
+
+      i {
+        color: white;
+      }
+
+      i.fa {
+        font-size: 0.8em;
+        display: inline-block;
+        border-radius: 99px;
+        background-color: #73bf69;
+        padding: 0.5em;
+        text-align: center;
+      }
+    }
+  }
+}

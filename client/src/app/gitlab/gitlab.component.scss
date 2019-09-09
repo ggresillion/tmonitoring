@@ -1,0 +1,48 @@
+.pipeline {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  * {
+    display: flex;
+    align-items: center;
+    margin: 0 6px;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+
+  .status {
+    width: 10%;
+  }
+
+  .branch {
+    width: 20%
+  }
+
+  .commit {
+    display: block;
+    width: 40%;
+
+    .avatar {
+      border-radius: 99px;
+      max-width: 22px;
+    }
+  }
+
+  .date {
+    width: 20%;
+  }
+
+  &:not(:last-child):after {
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #ababab;
+  }
+}

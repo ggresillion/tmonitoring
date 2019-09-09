@@ -1,0 +1,62 @@
+<div class="top-bar">
+    <div class="title">T-Monitoring</div>
+    <div class="toolbar">
+        <div class="toggle"
+             pTooltip="Add a module"
+             tooltipPosition="left"
+             showDelay="1000"
+             (click)="isMenuOpen = !isMenuOpen"
+             [@toggleAnimation]="isMenuOpen">+
+        </div>
+        <div class="menu" *ngIf="isMenuOpen" [@menuAnimation]>
+            <img src="../assets/icons/gitlab.svg"
+                 pTooltip="Gitlab"
+                 tooltipPosition="left"
+                 (click)="addWidget('gitlab')"/>
+            <img src="../assets/icons/grafana.svg"
+                 pTooltip="Grafana"
+                 tooltipPosition="left"
+                 (click)="addWidget('grafana')"/>
+            <img src="../assets/icons/kubernetes.svg"
+                 pTooltip="Kubernetes"
+                 tooltipPosition="left"
+                 (click)="addWidget('kubernetes')"/>
+            <img src="../assets/icons/prometheus.svg"
+                 pTooltip="Alert Manager"
+                 tooltipPosition="left"
+                 (click)="addWidget('alert-manager')"/>
+        </div>
+    </div>
+</div>
+
+<div class="alert-danger" *ngIf="alertLevel.toString() == 2"></div>
+<div class="container">
+    <gridster [options]="options" (change)="onDashboardChange()">
+        <gridster-item [item]="item" *ngFor="let item of dashboard">
+            <app-gitlab
+                    *ngIf="item.component === 'gitlab'"
+                    (removeSelf)="dashboardService.removeWidget(dashboard.indexOf(item))"
+                    (updateSettings)="dashboardService.updateSettings(dashboard.indexOf(item), $event)"
+                    [settings]="item.settings"
+            ></app-gitlab>
+            <app-alert-manager
+                    *ngIf="item.component === 'alert-manager'"
+                    (removeSelf)="dashboardService.removeWidget(dashboard.indexOf(item))"
+                    (updateSettings)="dashboardService.updateSettings(dashboard.indexOf(item), $event)"
+                    [settings]="item.settings"
+            ></app-alert-manager>
+            <app-kubernetes
+                    *ngIf="item.component === 'kubernetes'"
+                    (removeSelf)="dashboardService.removeWidget(dashboard.indexOf(item))"
+                    (updateSettings)="dashboardService.updateSettings(dashboard.indexOf(item), $event)"
+                    [settings]="item.settings"
+            ></app-kubernetes>
+            <app-grafana
+                    *ngIf="item.component === 'grafana'"
+                    (removeSelf)="dashboardService.removeWidget(dashboard.indexOf(item))"
+                    (updateSettings)="dashboardService.updateSettings(dashboard.indexOf(item), $event)"
+                    [settings]="item.settings"
+            ></app-grafana>
+        </gridster-item>
+    </gridster>
+</div>
