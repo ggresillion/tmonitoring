@@ -102,9 +102,12 @@ export class KubernetesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.host = this.settings.host;
-    this.token = this.settings.token;
-    this.refreshRate = this.settings.refreshRate;    this.kubernetesService.setSettings(this.settings);
+    if (!!this.settings) {
+      this.host = this.settings.host ? this.settings.host : '';
+      this.token = this.settings.token ? this.settings.token : '';
+      this.refreshRate = this.settings.refreshRate ? this.settings.refreshRate : 5;
+    }
+    this.kubernetesService.setSettings(this.settings);
     if (this.kubernetesService.isConnected()) {
       this.loadSummary();
     }
@@ -131,33 +134,43 @@ export class KubernetesComponent implements OnInit {
   loadSummary() {
     this.kubernetesService.getSummary().subscribe((sum: any) => {
       this.summary = sum;
-      this.deploymentsData.datasets[0].data = [
+      const deploymentsData = [
         sum.deployments.reduce((ac, val) => ac + (val.status === 'Running' ? 1 : 0), 0),
         sum.deployments.reduce((ac, val) => ac + (val.status === 'Pending' ? 1 : 0), 0),
         sum.deployments.reduce((ac, val) => ac + (val.status === 'Failed' ? 1 : 0), 0)
       ];
-      this.podsData.datasets[0].data = [
+      const podsData = [
         sum.pods.reduce((ac, val) => ac + (val.status === 'Running' ? 1 : 0), 0),
         sum.pods.reduce((ac, val) => ac + (val.status === 'Pending' ? 1 : 0), 0),
         sum.pods.reduce((ac, val) => ac + (val.status === 'Failed' ? 1 : 0), 0)
       ];
-      this.replicaSetsData.datasets[0].data = [
+      const replicaSetsData = [
         sum.replicaSets.reduce((ac, val) => ac + (val.status === 'Running' ? 1 : 0), 0),
         sum.replicaSets.reduce((ac, val) => ac + (val.status === 'Pending' ? 1 : 0), 0),
         sum.replicaSets.reduce((ac, val) => ac + (val.status === 'Failed' ? 1 : 0), 0)
       ];
       if (!!sum.statefulSets) {
-        this.statefulSetsData.datasets[0].data = [
+        const statefulSetsData = [
           sum.statefulSets.reduce((ac, val) => ac + (val.status === 'Running' ? 1 : 0), 0),
           sum.statefulSets.reduce((ac, val) => ac + (val.status === 'Pending' ? 1 : 0), 0),
           sum.statefulSets.reduce((ac, val) => ac + (val.status === 'Failed' ? 1 : 0), 0)
         ];
+        if (!statefulSetsData.every((val, i) => this.statefulSetsData.datasets[0].data[i] === val)) {
+          this.statefulSetsData.datasets[0].data = statefulSetsData;
+          this.statefulSetsData.reinit();
+        }
       }
-      this.deploymentChart.reinit();
-      this.podsChart.reinit();
-      this.replicaSetsChart.reinit();
-      if (this.statefulSetsData.datasets[0].data.length !== 0) {
-        this.statefulSetsChart.reinit();
+      if (!deploymentsData.every((val, i) => this.deploymentsData.datasets[0].data[i] === val)) {
+        this.deploymentsData.datasets[0].data = deploymentsData;
+        this.deploymentChart.reinit();
+      }
+      if (!podsData.every((val, i) => this.podsData.datasets[0].data[i] === val)) {
+        this.podsData.datasets[0].data = podsData;
+        this.podsChart.reinit();
+      }
+      if (!replicaSetsData.every((val, i) => this.replicaSetsData.datasets[0].data[i] === val)) {
+        this.replicaSetsData.datasets[0].data = replicaSetsData;
+        this.replicaSetsChart.reinit();
       }
     });
     this.isLoading = false;

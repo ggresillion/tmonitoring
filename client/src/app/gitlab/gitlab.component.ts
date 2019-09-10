@@ -34,10 +34,12 @@ export class GitlabComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.host = this.settings.host;
-    this.token = this.settings.token;
-    this.refreshRate = this.settings.refreshRate;
-    this.projectId = this.settings.projectId;
+    if (!!this.settings) {
+      this.host = this.settings.host ? this.settings.host : '';
+      this.token = this.settings.token ? this.settings.token : '';
+      this.projectId = this.settings.projectId ? this.settings.projectId : 0;
+      this.refreshRate = this.settings.refreshRate ? this.settings.refreshRate : 5;
+    }
     this.gitlabService.setSettings(this.settings);
     if (this.gitlabService.isConnected()) {
       this.loadPipelines();

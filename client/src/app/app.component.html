@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<div class="alert-danger" *ngIf="alertLevel.toString() == 2"></div>
+<div class="alert-danger" *ngIf="alertLevel == 2"></div>
 <div class="container">
     <gridster [options]="options" (change)="onDashboardChange()">
         <gridster-item [item]="item" *ngFor="let item of dashboard">

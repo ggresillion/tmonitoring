@@ -26,6 +26,10 @@ func Start() {
 
 	v1 := e.Group("/api/v1")
 
+	v1.GET("", func(c *gin.Context) {
+		c.JSON(200, gin.H{"status": "ok"})
+	})
+
 	gitlabController := NewGitlabController()
 	gitlabController.RegisterGitlabRoutes(v1.Group("/gitlab"))
 	kubernetesController := NewKubernetesController()

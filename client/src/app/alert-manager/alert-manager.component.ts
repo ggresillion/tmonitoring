@@ -30,8 +30,10 @@ export class AlertManagerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.host = this.settings.host;
-    this.refreshRate = this.settings.refreshRate;
+    if (!!this.settings) {
+      this.host = this.settings.host ? this.settings.host : '';
+      this.refreshRate = this.settings.refreshRate ? this.settings.refreshRate : 5;
+    }
     this.alertManagerService.setSettings(this.settings);
     if (this.alertManagerService.isConnected()) {
       this.getAlerts();
