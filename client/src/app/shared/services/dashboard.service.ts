@@ -12,7 +12,7 @@ export class DashboardService {
 
   constructor() {
     const sDashboard = localStorage.getItem('dashboard');
-    if(!!sDashboard){
+    if (!!sDashboard) {
       const dashboard = JSON.parse(sDashboard);
       this.dashboardSubject.next(dashboard);
       this.nextId = Math.max(dashboard.map(w => w.id));
@@ -35,21 +35,24 @@ export class DashboardService {
     this.persistDashboard();
   }
 
-  persistDashboard(){
+  persistDashboard() {
     localStorage.setItem('dashboard', JSON.stringify(this.dashboardSubject.value));
   }
 
   removeWidget(index: number) {
     const d = this.dashboardSubject.value;
-    console.log(d)
     d.splice(index, 1);
     this.updateDashboard(d);
   }
 
-  updateSettings(index: number, settings: any){
-    console.log(settings)
+  updateSettings(id: number, settings: any) {
     const d = this.dashboardSubject.value;
-    d[index].settings = settings;
+    d[id].settings = settings;
     this.updateDashboard(d);
+  }
+
+  getSettings(id: number) {
+    const widget = this.dashboardSubject.value[id];
+    return widget ? widget.settings : undefined;
   }
 }

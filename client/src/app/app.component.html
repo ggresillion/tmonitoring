@@ -25,6 +25,10 @@
                  pTooltip="Alert Manager"
                  tooltipPosition="left"
                  (click)="addWidget('alert-manager')"/>
+            <img src="../assets/icons/prometheus.svg"
+                 pTooltip="Sonar"
+                 tooltipPosition="left"
+                 (click)="addWidget('sonarqube')"/>
         </div>
     </div>
 </div>
@@ -35,28 +39,24 @@
         <gridster-item [item]="item" *ngFor="let item of dashboard">
             <app-gitlab
                     *ngIf="item.component === 'gitlab'"
-                    (removeSelf)="dashboardService.removeWidget(dashboard.indexOf(item))"
-                    (updateSettings)="dashboardService.updateSettings(dashboard.indexOf(item), $event)"
-                    [settings]="item.settings"
+                    [id]="dashboard.indexOf(item)"
             ></app-gitlab>
             <app-alert-manager
                     *ngIf="item.component === 'alert-manager'"
-                    (removeSelf)="dashboardService.removeWidget(dashboard.indexOf(item))"
-                    (updateSettings)="dashboardService.updateSettings(dashboard.indexOf(item), $event)"
-                    [settings]="item.settings"
+                    [id]="dashboard.indexOf(item)"
             ></app-alert-manager>
             <app-kubernetes
                     *ngIf="item.component === 'kubernetes'"
-                    (removeSelf)="dashboardService.removeWidget(dashboard.indexOf(item))"
-                    (updateSettings)="dashboardService.updateSettings(dashboard.indexOf(item), $event)"
-                    [settings]="item.settings"
+                    [id]="dashboard.indexOf(item)"
             ></app-kubernetes>
             <app-grafana
                     *ngIf="item.component === 'grafana'"
-                    (removeSelf)="dashboardService.removeWidget(dashboard.indexOf(item))"
-                    (updateSettings)="dashboardService.updateSettings(dashboard.indexOf(item), $event)"
-                    [settings]="item.settings"
+                    [id]="dashboard.indexOf(item)"
             ></app-grafana>
+            <app-sonarqube
+                    *ngIf="item.component === 'sonarqube'"
+                    [id]="dashboard.indexOf(item)"
+            ></app-sonarqube>
         </gridster-item>
     </gridster>
 </div>

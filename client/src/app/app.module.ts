@@ -15,6 +15,7 @@ import { GridsterModule } from 'angular-gridster2';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule, TooltipModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
+import { SonarqubeModule } from './sonarqube/sonarqube.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { FormsModule } from '@angular/forms';
     ButtonModule,
     TooltipModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    SonarqubeModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,30 @@
+<app-widget
+        title="Sonar"
+        subtitle="Project Quality"
+        [id]="id"
+        [settings]="settings"
+        (settingsChange)="onSettingsChange()"
+        [isReady]="isReady">
+    <div body>
+        {{measures | json}}
+    </div>
+    <div settings>
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-globe"></i></span>
+            <input type="text" pInputText placeholder="Host" [(ngModel)]="settings.host">
+        </div>
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-id-badge"></i></span>
+            <input type="text" pInputText placeholder="Project Key" [(ngModel)]="settings.projectKey">
+        </div>
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+            <input type="password" pInputText placeholder="Token" [(ngModel)]="settings.token">
+        </div>
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-sync"></i></span>
+            <input type="number" pInputText placeholder="Refresh rate" [(ngModel)]="settings.refreshRate">
+            <span class="ui-inputgroup-addon">sec.</span>
+        </div>
+    </div>
+</app-widget>

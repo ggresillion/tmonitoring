@@ -36,6 +36,8 @@ func Start() {
 	kubernetesController.RegisterKubernetesRoutes(v1.Group("/kubernetes"))
 	alertManagerController := NewAlertManagerController()
 	alertManagerController.RegisterAlertManagerRoutes(v1.Group("/alert-manager"))
+	sonarQubeController := NewSonarQubeController()
+	sonarQubeController.RegisterSonarQubeRoutes(v1.Group("/sonarqube"))
 	err := e.Run()
 	if err != nil {
 		panic(err)

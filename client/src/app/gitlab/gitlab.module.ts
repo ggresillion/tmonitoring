@@ -4,6 +4,7 @@ import {GitlabComponent} from "./gitlab.component";
 import {CardModule} from "primeng/card";
 import { InputTextModule, SplitButtonModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { FormsModule } from '@angular/forms';
     CardModule,
     SplitButtonModule,
     FormsModule,
-    InputTextModule
+    InputTextModule,
+    SharedModule
   ],
   exports: [
       GitlabComponent

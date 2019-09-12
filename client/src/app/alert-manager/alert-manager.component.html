@@ -1,62 +1,48 @@
-<div class="widget">
-    <div class="header">
-        <div class="title">Alert Manager</div>
-        <div class="subtitle">Display alerts</div>
-    </div>
-    <div class="gridster-item-content">
-        <div class="options">
-            <i class="fa fa-cog" (click)="displaySettings = true"></i>
-            <i class="fa fa-trash" (click)="removeSelf.emit()"></i>
+<app-widget
+    title="Alert Manager"
+    subtitle="Display alerts"
+    [id]="id"
+    [settings]="settings"
+    (settingsChange)="onSettingsChange()"
+    [isReady]="isReady">
+    <div body>
+        <div *ngIf="alerts.length === 0" class="no-alert">
+            <span>No alert.</span>
         </div>
-        <div class="settings" *ngIf="displaySettings">
-            <div class="ui-inputgroup">
-                <span class="ui-inputgroup-addon"><i class="fa fa-globe"></i></span>
-                <input type="text" pInputText placeholder="Host" [(ngModel)]="host">
-            </div>
-            <div class="ui-inputgroup">
-                <span class="ui-inputgroup-addon"><i class="fa fa-sync"></i></span>
-                <input type="text" pInputText placeholder="Refresh rate" [(ngModel)]="refreshRate">
-                <span class="ui-inputgroup-addon">sec.</span>
-            </div>
-            <div class="buttons">
-                <button pButton type="button" icon="fa fa-check" label="Save" (click)="saveSettings()"></button>
-                <button pButton type="button" class="ui-button-secondary" label="Cancel"
-                        (click)="displaySettings = false"></button>
-            </div>
-        </div>
-        <div *ngIf="!displaySettings">
-            <div class="no-token" *ngIf="!alertManagerService.isConnected()">
-                <span>Use the <i class="fa fa-cog"></i> menu to configure the widget.</span>
-            </div>
-            <div *ngIf="alertManagerService.isConnected()">
-                <div *ngIf="alerts.length === 0" class="no-alert">
-                    <span>No alert.</span>
-                </div>
-                <div *ngIf="alerts.length > 0">
-                    <div *ngFor="let alert of alerts" class="alert">
-                        <div class="labels">
-                            <div *ngFor="let label of getLabels(alert)">
-                                <div class="label">
-                                    <button pButton type="button" [label]="label.key + ': ' + label.value"
-                                            class="ui-button-danger">
-                                    </button>
-                                </div>
-
-                            </div>
+        <div *ngIf="alerts.length > 0">
+            <div *ngFor="let alert of alerts" class="alert">
+                <div class="labels">
+                    <div *ngFor="let label of getLabels(alert)">
+                        <div class="label">
+                            <button pButton type="button" [label]="label.key + ': ' + label.value"
+                                    class="ui-button-danger">
+                            </button>
                         </div>
-                        <div class="annotations">
-                            <div *ngFor="let annotation of getAnnotations(alert)">
-                                <div class="annotation">
-                                    <button pButton type="button" [label]="annotation.key + ': ' + annotation.value"
-                                            class="ui-button-secondary">
-                                    </button>
-                                </div>
-                            </div>
+
+                    </div>
+                </div>
+                <div class="annotations">
+                    <div *ngFor="let annotation of getAnnotations(alert)">
+                        <div class="annotation">
+                            <button pButton type="button" [label]="annotation.key + ': ' + annotation.value"
+                                    class="ui-button-secondary">
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <div settings>
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-globe"></i></span>
+            <input type="text" pInputText placeholder="Host" [(ngModel)]="settings.host">
+        </div>
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-sync"></i></span>
+            <input type="text" pInputText placeholder="Refresh rate" [(ngModel)]="settings.refreshRate">
+            <span class="ui-inputgroup-addon">sec.</span>
+        </div>
+    </div>
+</app-widget>
 

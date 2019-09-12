@@ -5,6 +5,7 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/primeng';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [AlertManagerComponent],
@@ -16,7 +17,8 @@ import { InputTextModule } from 'primeng/primeng';
     CardModule,
     ButtonModule,
     FormsModule,
-    InputTextModule
+    InputTextModule,
+    SharedModule
   ]
 })
 export class AlertManagerModule { }

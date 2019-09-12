@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AlertManagerService } from './alert-manager.service';
+import { WidgetComponent } from '../shared/widget/widget.component';
+import { DashboardService } from '../shared/services/dashboard.service';
 
 @Component({
   selector: 'app-alert-manager',
@@ -7,50 +9,28 @@ import { AlertManagerService } from './alert-manager.service';
   styleUrls: ['./alert-manager.component.scss'],
   providers: [AlertManagerService],
 })
-export class AlertManagerComponent implements OnInit {
-
-  @Output()
-  removeSelf = new EventEmitter();
-  @Output()
-  updateSettings = new EventEmitter<any>();
-  @Input()
-  settings: {
-    host: string,
-    refreshRate: number,
-  };
-  host = '';
-  refreshRate = 5;
-
-
-  displaySettings = false;
+export class AlertManagerComponent extends WidgetComponent implements OnInit {
 
   alerts = [];
 
-  constructor(private readonly alertManagerService: AlertManagerService) {
+  constructor(private readonly dashboardService: DashboardService,
+              private readonly alertManagerService: AlertManagerService) {
+    super(dashboardService);
   }
 
   ngOnInit() {
-    if (!!this.settings) {
-      this.host = this.settings.host ? this.settings.host : '';
-      this.refreshRate = this.settings.refreshRate ? this.settings.refreshRate : 5;
-    }
-    this.alertManagerService.setSettings(this.settings);
-    if (this.alertManagerService.isConnected()) {
-      this.getAlerts();
-    }
+    this.settings = {
+      host: '',
+      refreshRate: 5,
+    };
+    this.getSettings();
+    this.onSettingsChange();
   }
 
-  saveSettings() {
-    this.updateSettings.emit({
-      host: this.host,
-      refreshRate: this.refreshRate,
-    });
-    this.displaySettings = false;
-    this.alertManagerService.setSettings({
-      host: this.host,
-      refreshRate: this.refreshRate,
-    });
-    if (this.alertManagerService.isConnected()) {
+  onSettingsChange() {
+    if (this.settings.host != '') {
+      this.isReady = true;
+      this.alertManagerService.setSettings(this.settings);
       this.getAlerts();
     }
   }

@@ -1,29 +1,21 @@
-<div class="widget">
-    <div class="header">
-        <div class="title">Grafana</div>
-        <div class="subtitle">Monitor your deployments</div>
-    </div>
-    <div class="gridster-item-content">
-        <div class="options">
-            <i class="fa fa-pencil-alt" (click)="isEditMode = true;"></i>
-            <i class="fa fa-plus" (click)="displayAddGraph = true;"></i>
-            <i class="fa fa-trash" (click)="removeSelf.emit()"></i>
-        </div>
-        <div class="settings" *ngIf="displayAddGraph">
-            <div class="ui-inputgroup">
-                <span class="ui-inputgroup-addon"><i class="fa fa-globe"></i></span>
-                <input type="text" pInputText placeholder="Snippet" [(ngModel)]="newGraphSnippet">
-            </div>
-            <div class="buttons">
-                <button pButton type="button" icon="fa fa-check" label="Save" (click)="addGraph()"></button>
-                <button pButton type="button" class="ui-button-secondary" label="Cancel"
-                        (click)="displayAddGraph = false"></button>
-            </div>
-        </div>
-        <div class="graphs" *ngIf="!displayAddGraph">
-            <div *ngFor="let graph of graphs">
-                <div class="graph" [innerHTML]="graph"></div>
-            </div>
+<app-widget
+    title="Grafana"
+    subtitle="Monitor your deployments"
+    [id]="id"
+    [settings]="settings"
+    [isReady]="isReady">
+    <div body>
+        <div *ngFor="let graph of graphs">
+            <div class="graph" [innerHTML]="graph"></div>
         </div>
     </div>
-</div>
+    <div settings>
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-globe"></i></span>
+            <input type="text" pInputText placeholder="Snippet" [(ngModel)]="newGraphSnippet">
+        </div>
+        <div class="buttons">
+            <button pButton type="button" icon="fa fa-plus" label="Add" (click)="addGraph()"></button>
+        </div>
+    </div>
+</app-widget>

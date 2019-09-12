@@ -6,6 +6,7 @@ import { ChartModule } from 'primeng/chart';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule, InputTextModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     DialogModule,
     InputTextModule,
     ButtonModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers: [],
   exports: [

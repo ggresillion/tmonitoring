@@ -1,0 +1,27 @@
+<div class="widget">
+    <div class="header">
+        <div class="title">{{title}}</div>
+        <div class="subtitle">{{subtitle}}</div>
+    </div>
+    <div class="gridster-item-content">
+        <div class="options">
+            <ng-content select="[options]"></ng-content>
+            <i class="fa fa-cog" (click)="displaySettings = true"></i>
+            <i class="fa fa-trash" (click)="removeSelf()"></i>
+        </div>
+        <div *ngIf="displaySettings" class="settings">
+            <ng-content select="[settings]"></ng-content>
+            <div class="buttons">
+                <button pButton type="button" icon="fa fa-check" label="Save" (click)="saveSettings()"></button>
+                <button pButton type="button" class="ui-button-secondary" label="Cancel"
+                        (click)="closeSettings()"></button>
+            </div>
+        </div>
+        <div *ngIf="!displaySettings">
+            <ng-content select="[body]" *ngIf="isReady"></ng-content>
+            <div class="no-token" *ngIf="!isReady">
+                <span>Use the <i class="fa fa-cog"></i> menu to configure the widget.</span>
+            </div>
+        </div>
+    </div>
+</div>

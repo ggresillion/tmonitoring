@@ -6,6 +6,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ChipsModule } from 'primeng/chips';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ButtonModule } from 'primeng/button';
     DialogModule,
     ChipsModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    SharedModule
   ],
   exports: [
     GrafanaComponent

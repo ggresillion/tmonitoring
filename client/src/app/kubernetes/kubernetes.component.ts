@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { KubernetesService } from './kubernetes.service';
 import { UIChart } from 'primeng/chart';
+import { WidgetComponent } from '../shared/widget/widget.component';
+import { DashboardService } from '../shared/services/dashboard.service';
 
 @Component({
   selector: 'app-kubernetes',
@@ -8,22 +10,7 @@ import { UIChart } from 'primeng/chart';
   styleUrls: ['./kubernetes.component.scss'],
   providers: [KubernetesService]
 })
-export class KubernetesComponent implements OnInit {
-
-  @Output()
-  removeSelf = new EventEmitter();
-  @Output()
-  updateSettings = new EventEmitter<any>();
-  @Input()
-  settings: {
-    token: string,
-    host: string,
-    refreshRate: number,
-  };
-
-  host = '';
-  token = '';
-  refreshRate = 5;
+export class KubernetesComponent extends WidgetComponent implements OnInit {
 
   isLoading = true;
 
@@ -96,37 +83,25 @@ export class KubernetesComponent implements OnInit {
     statefulSets: [],
   };
 
-  displaySettings = false;
-
-  constructor(private readonly kubernetesService: KubernetesService) {
+  constructor(private readonly dashboardService: DashboardService,
+              private readonly kubernetesService: KubernetesService) {
+    super(dashboardService);
   }
 
   ngOnInit() {
-    if (!!this.settings) {
-      this.host = this.settings.host ? this.settings.host : '';
-      this.token = this.settings.token ? this.settings.token : '';
-      this.refreshRate = this.settings.refreshRate ? this.settings.refreshRate : 5;
-    }
-    this.kubernetesService.setSettings(this.settings);
-    if (this.kubernetesService.isConnected()) {
-      this.loadSummary();
-    }
+    this.settings = {
+      host: '',
+      token: '',
+      refreshRate: 5,
+    };
+    this.getSettings();
+    this.onSettingsChange();
   }
 
-
-  saveSettings() {
-    this.updateSettings.emit({
-      host: this.host,
-      token: this.token,
-      refreshRate: this.refreshRate,
-    });
-    this.displaySettings = false;
-    this.kubernetesService.setSettings({
-      host: this.host,
-      token: this.token,
-      refreshRate: this.refreshRate,
-    });
-    if (this.kubernetesService.isConnected()) {
+  onSettingsChange() {
+    if (this.settings.host != '') {
+      this.isReady = true;
+      this.kubernetesService.setSettings(this.settings);
       this.loadSummary();
     }
   }
