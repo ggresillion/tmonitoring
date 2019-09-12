@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Measures } from './measures';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class SonarqubeService {
   }
 
   getMeasures() {
-    return this.http.get<any>(
+    return this.http.get<Measures>(
       environment.api
       + '/sonarqube/' + this.projectKey
       + '/measures?host=' + this.host

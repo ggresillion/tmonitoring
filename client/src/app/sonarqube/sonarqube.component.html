@@ -5,8 +5,49 @@
         [settings]="settings"
         (settingsChange)="onSettingsChange()"
         [isReady]="isReady">
-    <div body>
-        {{measures | json}}
+    <div body class="measures">
+        <div class="measure">
+            <div class="type">
+                <span>Code Smells</span>
+                <i class="fa fa-2x fa-radiation code-smells"></i>
+            </div>
+            <div class="value">{{measures.codeSmells}}</div>
+        </div>
+        <div class="measure">
+            <div class="type">
+                <span>Bugs</span>
+                <i class="fa fa-2x fa-bug bugs"></i>
+            </div>
+            <div class="value">{{measures.bugs}}</div>
+        </div>
+        <div class="measure">
+            <div class="type">
+                <span>Vulnerabilities</span>
+                <i class="fa fa-2x fa-lock-open vulnerabilities"></i>
+            </div>
+            <div class="value">{{measures.vulnerabilities}}</div>
+        </div>
+        <div class="measure">
+            <div class="type">
+                <span>Debt</span>
+                <i class="fa fa-2x fa-mug-hot debt"></i>
+            </div>
+            <div class="value">{{measures.debt}}</div>
+        </div>
+        <div class="measure">
+            <div class="type">
+                <span>Coverage</span>
+                <i class="fa fa-2x fa-vial coverage"></i>
+            </div>
+            <div class="value">{{measures.coverage}}</div>
+        </div>
+        <div class="measure">
+            <div class="type">
+                <span>Duplication</span>
+                <i class="fa fa-2x fa-recycle duplication"></i>
+            </div>
+            <div class="value">{{measures.duplication}}</div>
+        </div>
     </div>
     <div settings>
         <div class="ui-inputgroup">
