@@ -7,6 +7,7 @@ require (
 	github.com/alecthomas/units v0.0.0-20190717042225-c3de453c63f4 // indirect
 	github.com/gin-contrib/cors v1.3.0
 	github.com/gin-gonic/gin v1.4.0
+	github.com/go-delve/delve v1.3.1 // indirect
 	github.com/googleapis/gnostic v0.3.1 // indirect
 	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/hashicorp/consul/api v1.2.0 // indirect

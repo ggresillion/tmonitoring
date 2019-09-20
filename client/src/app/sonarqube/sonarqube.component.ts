@@ -40,4 +40,19 @@ export class SonarqubeComponent extends WidgetComponent implements OnInit {
   getMeasures() {
     this.sonarqubeService.getMeasures().subscribe(m => this.measures = m);
   }
+
+  getRating(val: number): string {
+    switch (val) {
+      case 1:
+        return 'a';
+      case 2:
+        return 'b';
+      case 3:
+        return 'c';
+      case 4:
+        return 'd';
+      case 5:
+        return 'e';
+    }
+  }
 }

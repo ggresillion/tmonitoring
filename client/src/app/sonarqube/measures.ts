@@ -6,5 +6,8 @@ export class Measures {
   debt: number;
   coverage: number;
   duplication: number;
+  reliabilityRating: number;
+  securityRating: number;
+  maintenabilityRating: number;
 
 }

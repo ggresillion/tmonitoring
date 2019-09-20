@@ -9,12 +9,15 @@ import (
 )
 
 type Metrics struct {
-	CodeSmells      float64 `json:"codeSmells"`
-	Bugs            float64 `json:"bugs"`
-	Vulnerabilities float64 `json:"vulnerabilities"`
-	Debt            float64 `json:"debt"`
-	Coverage        float64 `json:"coverage"`
-	Duplication     float64 `json:"duplication"`
+	CodeSmells           float64 `json:"codeSmells"`
+	Bugs                 float64 `json:"bugs"`
+	Vulnerabilities      float64 `json:"vulnerabilities"`
+	Debt                 float64 `json:"debt"`
+	Coverage             float64 `json:"coverage"`
+	Duplication          float64 `json:"duplication"`
+	ReliabilityRating    float64 `json:"reliabilityRating"`
+	SecurityRating       float64 `json:"securityRating"`
+	MaintenabilityRating float64 `json:"maintenabilityRating"`
 }
 
 type SonarQubeController struct {
@@ -51,6 +54,15 @@ func mapToMetrics(sMeasures []*sonargo.SonarMeasure) *Metrics {
 		case "vulnerabilities":
 			measures.Vulnerabilities = val
 			break
+		case "reliability_rating":
+			measures.ReliabilityRating = val
+			break
+		case "security_rating":
+			measures.SecurityRating = val
+			break
+		case "sqale_rating":
+			measures.MaintenabilityRating = val
+			break
 		}
 	}
 	return &measures
@@ -74,12 +86,12 @@ func (ct *SonarQubeController) getOverview(c *gin.Context) {
 
 	client, err := sonargo.NewClient(host+"/api", token, "")
 	if err != nil {
-		c.JSON(401, err)
+		c.JSON(401, err.Error())
 		return
 	}
 	res, _, err := client.Measures.Component(&sonargo.MeasuresComponentOption{
 		Component:  projectKey,
-		MetricKeys: "bugs,vulnerabilities,code_smells,sqale_index,coverage,duplicated_blocks",
+		MetricKeys: "bugs,vulnerabilities,code_smells,sqale_index,coverage,duplicated_blocks,reliability_rating,security_rating,sqale_rating",
 	})
 	if err != nil {
 		c.JSON(401, err.Error())

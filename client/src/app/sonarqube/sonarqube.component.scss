@@ -27,39 +27,41 @@
       width: 100%;
 
       .fa {
-        -webkit-text-fill-color: white;
-        -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: black;
+        position: relative;
+        -webkit-text-fill-color: #a3a3a3;
+
+        .badge {
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          font-size: .7em;
+          color: #a3a3a3;
+          -webkit-text-fill-color:#a3a3a3;
+          width: 18px;
+          height: 18px;
+          text-align: center;
+          line-height: 18px;
+        }
       }
 
-      .code-smells {
-        color: brown;
-        -webkit-text-fill-color: brown;
+      .rating-a {
+        -webkit-text-fill-color: #34a835;
       }
 
-      .debt {
-        color: saddlebrown;
-        -webkit-text-fill-color: saddlebrown;
+      .rating-b {
+        -webkit-text-fill-color: #77a83b;
       }
 
-      .bugs {
-        color: purple;
-        -webkit-text-fill-color: purple;
+      .rating-c {
+        -webkit-text-fill-color: #a7a82f;
       }
 
-      .coverage {
-        color: forestgreen;
-        -webkit-text-fill-color: forestgreen;
+      .rating-d {
+        -webkit-text-fill-color: orange;
       }
 
-      .vulnerabilities {
-        color: dimgrey;
-        -webkit-text-fill-color: dimgrey;
-      }
-
-      .duplication {
-        color: yellowgreen;
-        -webkit-text-fill-color: yellowgreen;
+      .rating-e {
+        -webkit-text-fill-color: #e91224;
       }
 
       & > * {
