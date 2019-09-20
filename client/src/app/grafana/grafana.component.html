@@ -1,12 +1,13 @@
 <app-widget
-    title="Grafana"
-    subtitle="Monitor your deployments"
-    [id]="id"
-    [settings]="settings"
-    [isReady]="isReady">
+        title="Grafana"
+        subtitle="Monitor your deployments"
+        [id]="id"
+        [settings]="settings"
+        [isReady]="isReady">
     <div body>
-        <div *ngFor="let graph of graphs">
-            <div class="graph" [innerHTML]="graph"></div>
+        <div class="graphs">
+            <div class="graph" *ngFor="let graph of graphs" [innerHTML]="graph">
+            </div>
         </div>
     </div>
     <div settings>

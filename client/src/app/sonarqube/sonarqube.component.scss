@@ -1,15 +1,15 @@
 .measures {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-  grid-auto-columns: 1fr 200px;
-
-  & > * {
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
 
   .measure {
     display: flex;
     height: 8vh;
+    margin: 12px;
+    width: 200px;
+    min-width: 200px;
 
     & > * {
       display: flex;
@@ -25,6 +25,7 @@
       border-bottom-left-radius: 6px;
       font-size: 16px;
       width: 100%;
+      padding-right: 12px;
 
       .fa {
         position: relative;
@@ -36,7 +37,7 @@
           right: -10px;
           font-size: .7em;
           color: #a3a3a3;
-          -webkit-text-fill-color:#a3a3a3;
+          -webkit-text-fill-color: #a3a3a3;
           width: 18px;
           height: 18px;
           text-align: center;
@@ -75,8 +76,8 @@
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
       padding: 6px;
-      width: 100px;
       font-size: 26px;
+      width: 100%;
     }
 
 
