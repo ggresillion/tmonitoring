@@ -55,4 +55,14 @@ export class DashboardService {
     const widget = this.dashboardSubject.value[id];
     return widget ? widget.settings : undefined;
   }
+
+  getAllSettingsAsBase64() {
+    return window.btoa(unescape(encodeURIComponent(localStorage.getItem('dashboard'))));
+  }
+
+  importSettingsFromBase64(bSettings: string) {
+    const settings = decodeURIComponent(escape(window.atob(bSettings)));
+    this.dashboardSubject.next(JSON.parse(settings));
+    this.persistDashboard();
+  }
 }

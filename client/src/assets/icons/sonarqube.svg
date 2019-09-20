@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" data-name="Calque 1" width="393" height="381" style=""><rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
+    <defs>
+        <style>
+            .cls-1 {
+                fill: #fff;
+            }
+
+            .cls-2 {
+                fill: #fff;
+            }
+        </style>
+    </defs>
+    <title>SonarQube white</title>
+    
+<g class="currentLayer" style=""><title>Layer 1</title><g id="SonarQube_Black" data-name="SonarQube Black" class="" fill="#ffffff" fill-opacity="1">
+        <path class="cls-2" d="M347.9100195312501,381.2786549448967 h-22 c0,-177.18 -146.21,-321.34 -325.91,-321.34 v-22 C191.83001953124995,37.9386549448967 347.9100195312501,191.9586549448967 347.9100195312501,381.2786549448967 z" id="svg_1" fill="#ffffff" fill-opacity="1"/>
+        <path class="cls-2" d="M363.1300195312499,263.1286549448967 c-26.43,-111.17 -116.49,-204 -229.42,-236.38 l5,-17.63 c119.2,34.22 214.28,132.25 242.21,249.77 z" id="svg_2" fill="#ffffff" fill-opacity="1"/>
+        <path class="cls-2" d="M380.05001953125,158.8286549448967 c-27.22,-59.35 -73.59,-111.11 -130.57,-145.73 l7.62,-12.54 c59.46,36.13 107.86,90.16 136.29,152.15 z" id="svg_3" fill="#ffffff" fill-opacity="1"/>
+    </g></g></svg>

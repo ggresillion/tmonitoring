@@ -13,9 +13,10 @@ import { SharedModule } from './shared/shared.module';
 import { MenubarModule } from 'primeng/menubar';
 import { GridsterModule } from 'angular-gridster2';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule, TooltipModule } from 'primeng/primeng';
+import { DialogModule, DropdownModule, InputTextareaModule, InputTextModule, MessageService, TooltipModule } from 'primeng/primeng';
 import { FormsModule } from '@angular/forms';
 import { SonarqubeModule } from './sonarqube/sonarqube.module';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -39,8 +40,12 @@ import { SonarqubeModule } from './sonarqube/sonarqube.module';
     FormsModule,
     SonarqubeModule,
     SharedModule,
+    ToastModule,
+    DialogModule,
+    InputTextModule,
+    InputTextareaModule,
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

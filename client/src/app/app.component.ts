@@ -4,6 +4,7 @@ import { AlertLevel } from './shared/model/alert-level';
 import { DisplayGrid, GridsterConfig, GridType } from 'angular-gridster2';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DashboardService } from './shared/services/dashboard.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -81,10 +82,15 @@ export class AppComponent implements OnInit {
 
   dashboard = [];
 
+  displayImportConfiguration = false;
+
+  base64Config = '';
+
   constructor(
     private readonly alertService: AlertService,
     private readonly dashboardService: DashboardService,
-    ) {
+    private readonly messageService: MessageService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -97,7 +103,41 @@ export class AppComponent implements OnInit {
     this.isMenuOpen = false;
   }
 
-  onDashboardChange(){
+  onDashboardChange() {
     this.dashboardService.persistDashboard();
+  }
+
+  shareConfiguration() {
+    let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = this.dashboardService.getAllSettingsAsBase64();
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Copied to clipboard',
+      detail: 'You can now share your configuration',
+    });
+  }
+
+  importConfiguration(){
+      this.dashboardService.importSettingsFromBase64(this.base64Config);
+      this.closeImportConfiguration();
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Configuration imported',
+        detail: 'Your configuration is now loaded',
+      })
+  }
+
+  closeImportConfiguration(){
+    this.base64Config = '';
+    this.displayImportConfiguration = false;
   }
 }

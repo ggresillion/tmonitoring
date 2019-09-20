@@ -1,13 +1,6 @@
 <div class="top-bar">
     <img class="title" src="../assets/icons/tmonitoring.png">
     <div class="toolbar">
-        <div class="toggle"
-             pTooltip="Add a module"
-             tooltipPosition="left"
-             showDelay="1000"
-             (click)="isMenuOpen = !isMenuOpen"
-             [@toggleAnimation]="isMenuOpen">+
-        </div>
         <div class="menu" *ngIf="isMenuOpen" [@menuAnimation]>
             <img src="../assets/icons/gitlab.svg"
                  pTooltip="Gitlab"
@@ -25,10 +18,27 @@
                  pTooltip="Alert Manager"
                  tooltipPosition="left"
                  (click)="addWidget('alert-manager')"/>
-            <img src="../assets/icons/prometheus.svg"
+            <img src="../assets/icons/sonarqube.svg"
                  pTooltip="Sonar"
                  tooltipPosition="left"
                  (click)="addWidget('sonarqube')"/>
+        </div>
+        <div class="item toggle"
+             pTooltip="Add a module"
+             tooltipPosition="left"
+             showDelay="1000"
+             (click)="isMenuOpen = !isMenuOpen"
+             [@toggleAnimation]="isMenuOpen">+
+        </div>
+        <div class="item"
+             pTooltip="Import the configuration"
+             (click)="displayImportConfiguration = true">
+            <i class="fa fa-2x fa-file-import"></i>
+        </div>
+        <div class="item"
+             pTooltip="Share the configuration"
+             (click)="shareConfiguration()">
+            <i class="fa fa-2x fa-file-export"></i>
         </div>
     </div>
 </div>
@@ -60,3 +70,29 @@
         </gridster-item>
     </gridster>
 </div>
+
+<p-toast position="top-center"></p-toast>
+
+<p-dialog header="Import configuration" [(visible)]="displayImportConfiguration">
+    <div class="import-config">
+        <div class="ui-inputgroup">
+            <textarea type="textarea"
+                      pInputTextarea
+                      placeholder="Configuration"
+                      [(ngModel)]="base64Config">
+                </textarea>
+        </div>
+        <div class="ui-inputgroup buttons">
+            <button pButton
+                    type="button"
+                    icon="fa fa-check"
+                    label="Import"
+                    (click)="importConfiguration()"></button>
+            <button pButton
+                    type="button"
+                    class="ui-button-secondary"
+                    label="Cancel"
+                    (click)="closeImportConfiguration()"></button>
+        </div>
+    </div>
+</p-dialog>
