@@ -99,7 +99,7 @@ export class KubernetesComponent extends WidgetComponent implements OnInit {
   }
 
   onSettingsChange() {
-    if (this.settings.host != '') {
+    if (this.settings.namespace != '') {
       this.isReady = true;
       this.kubernetesService.setSettings(this.settings);
       this.loadSummary();

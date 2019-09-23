@@ -4,6 +4,7 @@ import { AlertService } from './services/alert.service';
 import { WidgetComponent } from './widget/widget.component';
 import { ButtonModule } from 'primeng/button';
 import { DashboardService } from './services/dashboard.service';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
   providers: [
@@ -15,9 +16,10 @@ import { DashboardService } from './services/dashboard.service';
     ButtonModule,
   ],
   exports: [
-    WidgetComponent
+    WidgetComponent,
+    TruncatePipe
   ],
-  declarations: [WidgetComponent]
+  declarations: [WidgetComponent, TruncatePipe]
 })
 export class SharedModule {
 }

@@ -1,6 +1,6 @@
 <app-widget
         title="Sonar"
-        subtitle="Project Quality"
+        [subtitle]="settings.projectKey"
         [id]="id"
         [settings]="settings"
         (settingsChange)="onSettingsChange()"
@@ -45,7 +45,7 @@
                 <span>Coverage</span>
                 <i [class]="'fa fa-2x fa-vial'"></i>
             </div>
-            <div class="value">{{measures.coverage}}</div>
+            <div class="value">{{measures.coverage | truncate }} %</div>
         </div>
         <div class="measure">
             <div class="type">

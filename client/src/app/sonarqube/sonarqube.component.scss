@@ -6,8 +6,8 @@
 
   .measure {
     display: flex;
-    height: 8vh;
-    margin: 12px;
+    height: 6vh;
+    margin: 6px;
     width: 200px;
     min-width: 200px;
 
@@ -30,6 +30,7 @@
       .fa {
         position: relative;
         -webkit-text-fill-color: #a3a3a3;
+        font-size: 24px;
 
         .badge {
           position: absolute;

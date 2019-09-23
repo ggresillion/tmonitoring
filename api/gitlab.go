@@ -90,8 +90,8 @@ func (ct *GitlabController) getPipelines(c *gin.Context) {
 			}
 			pipelines = append(pipelines, *pipeline)
 		}
-		if gJob.Status != "passed" {
-			pipeline.Status = gJob.Status
+		if gJob.Pipeline.Status != "success" {
+			pipeline.Status = gJob.Pipeline.Status
 		}
 		pipeline.Jobs = append(pipeline.Jobs, Job{ID: gJob.ID, Name: gJob.Name, Status: gJob.Status})
 	}

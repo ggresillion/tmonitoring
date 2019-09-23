@@ -11,6 +11,7 @@ export class KubernetesService {
 
   private token: string;
   private host: string;
+  private namespace: string;
   private refreshDelay = 5000;
 
   constructor(private readonly http: HttpClient) {
@@ -26,6 +27,7 @@ export class KubernetesService {
     }
     this.token = settings.token;
     this.host = settings.host;
+    this.namespace = settings.namespace;
     this.refreshDelay = settings.refreshDelay ? settings.refreshDelay * 1000 : 5000;
   }
 
@@ -33,7 +35,7 @@ export class KubernetesService {
     return timer(0, this.refreshDelay).pipe(flatMap(() =>
       this.http.get(
         environment.api
-        + '/kubernetes/iboost-preprod/summary?token='
+        + '/kubernetes/'+ this.namespace +'/summary?token='
         + this.token + '&host=' + this.host
       )
     ));

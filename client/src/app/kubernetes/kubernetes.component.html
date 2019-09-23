@@ -1,6 +1,6 @@
 <app-widget
         title="Kubernetes"
-        subtitle="Information about the deployment"
+        [subtitle]="settings.namespace"
         [id]="id"
         [settings]="settings"
         (settingsChange)="onSettingsChange()"
@@ -77,6 +77,10 @@
         <div class="ui-inputgroup">
             <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
             <input type="password" pInputText placeholder="Token" [(ngModel)]="settings.token">
+        </div>
+        <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon"><i class="fa fa-id-badge"></i></span>
+            <input type="text" pInputText placeholder="Namespace" [(ngModel)]="settings.namespace">
         </div>
         <div class="ui-inputgroup">
             <span class="ui-inputgroup-addon"><i class="fa fa-sync"></i></span>
