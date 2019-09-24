@@ -8,49 +8,49 @@
     <div body class="measures" *ngIf="!!measures">
         <div class="measure">
             <div class="type">
-                <span>Debt</span>
                 <i [class]="'fa fa-2x fa-mug-hot rating-' + getRating(measures.maintenabilityRating)">
                     <div class="badge">{{getRating(measures.maintenabilityRating).toUpperCase()}}</div>
                 </i>
+                <span>Debt</span>
             </div>
             <div class="value">{{measures.debt}}</div>
         </div>
         <div class="measure">
             <div class="type">
-                <span>Vulnerabilities</span>
                 <i [class]="'fa fa-2x fa-lock-open rating-' + getRating(measures.securityRating)">
                     <div class="badge">{{getRating(measures.securityRating).toUpperCase()}}</div>
                 </i>
+                <span>Vulnerabilities</span>
             </div>
             <div class="value">{{measures.vulnerabilities}}</div>
         </div>
         <div class="measure">
             <div class="type">
-                <span>Bugs</span>
                 <i [class]="'fa fa-2x fa-bug rating-' + getRating(measures.reliabilityRating)">
                     <div class="badge">{{getRating(measures.reliabilityRating).toUpperCase()}}</div>
                 </i>
+                <span>Bugs</span>
             </div>
             <div class="value">{{measures.bugs}}</div>
         </div>
         <div class="measure">
             <div class="type">
-                <span>Code Smells</span>
                 <i class="fa fa-2x fa-radiation code-smells"></i>
+                <span>Code Smells</span>
             </div>
             <div class="value">{{measures.codeSmells}}</div>
         </div>
         <div class="measure">
             <div class="type">
-                <span>Coverage</span>
                 <i [class]="'fa fa-2x fa-vial'"></i>
+                <span>Coverage</span>
             </div>
             <div class="value">{{measures.coverage | truncate }} %</div>
         </div>
         <div class="measure">
             <div class="type">
-                <span>Duplication</span>
                 <i [class]="'fa fa-2x fa-recycle'"></i>
+                <span>Duplication</span>
             </div>
             <div class="value">{{measures.duplication}}</div>
         </div>
