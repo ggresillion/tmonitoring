@@ -5,17 +5,30 @@
         [isReady]="isReady">
     <div body>
         <div class="graphs">
-            <div class="graph" *ngFor="let graph of graphs" [innerHTML]="graph">
+            <div class="graph" *ngFor="let graph of graphs" [innerHTML]="graph.snippet">
             </div>
         </div>
     </div>
-    <div settings>
-        <div class="ui-inputgroup">
-            <span class="ui-inputgroup-addon"><i class="fa fa-globe"></i></span>
-            <input type="text" pInputText placeholder="Snippet" [(ngModel)]="newGraphSnippet">
-        </div>
-        <div class="buttons">
+    <div class="settings" settings>
+        <div class="form">
+            <div class="fields">
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-file-signature"></i></span>
+                    <input type="text" pInputText placeholder="Name" [(ngModel)]="newGraph.name">
+                </div>
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-code"></i></span>
+                    <input type="text" pInputText placeholder="Snippet" [(ngModel)]="newGraph.snippet">
+                </div>
+            </div>
             <button pButton type="button" icon="fa fa-plus" label="Add" (click)="addGraph()"></button>
+        </div>
+        <div class="graphs">
+            <div *ngFor="let graph of settings.graphs" class="graph">
+                <span>{{graph.name}}</span>
+                <button (click)="deleteGraph(graph.name)" pButton class="ui-button-danger"
+                        icon="fa fa-trash-alt"></button>
+            </div>
         </div>
     </div>
 </app-widget>

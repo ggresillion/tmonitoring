@@ -10,3 +10,32 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+
+.settings {
+
+  .form {
+    position: relative;
+
+    button {
+      position: absolute;
+      right: -76px;
+      bottom: 1px;
+    }
+  }
+
+  .graphs {
+    margin: 12px 0;
+
+    .graph {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      button {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+}
